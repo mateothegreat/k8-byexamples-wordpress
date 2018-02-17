@@ -14,3 +14,6 @@
 # Wordpress @ Kubernetes
 
 > k8 by example -- straight to the point, simple execution.
+
+* Tuned settings to allow large file uploads.
+* Disabled "X-Powered-By: php7.6" response headers.
