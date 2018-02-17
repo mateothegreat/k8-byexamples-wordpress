@@ -10,3 +10,4 @@ data:
       upload_max_filesize = 30M
       post_max_size = 30M
       max_execution_time = 600
+      expose_php = Off
