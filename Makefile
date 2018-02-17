@@ -8,7 +8,18 @@
 include .make/Makefile.inc
 
 APP				?= wordpress
-HOST			?= yomateo.io
+HOST			?= wordpress.gcp.streaming-platform.com
 SERVICE_NAME	?= wordpress
 SERVICE_PORT	?= 80
+NS				?= default
 export
+
+install: guard-HOST guard-SERVICE_NAME guard-SERVICE_PORT
+
+
+## Create mysql database & grant (DROP DATABASE is performed!)
+initdb:	
+
+	mysql -h mysql -uroot -pmysql -e "DROP DATABASE wordpress"
+	mysql -h mysql -uroot -pmysql -e "CREATE DATABASE wordpress"
+	mysql -h mysql -uroot -pmysql -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'10.28.%' IDENTIFIED BY 'wordpress'"
