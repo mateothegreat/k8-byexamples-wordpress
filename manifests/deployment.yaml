@@ -35,6 +35,7 @@ spec:
           volumeMounts:
             - name: config-volume
               mountPath: /usr/local/etc/php/conf.d/uploads.ini
+              subPath: uploads.ini
             - name: wordpress-local-storage
               mountPath: /var/www/html
       volumes:
@@ -44,6 +45,6 @@ spec:
         - name: config-volume
           configMap:
             name: wordpress-config
-            items:
-            - key: uploads.ini
-              path: uploads.ini
+            # items:
+            # - key: uploads.ini
+              # path: uploads.ini
