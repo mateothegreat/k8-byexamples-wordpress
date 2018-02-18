@@ -8,21 +8,22 @@
 include .make/Makefile.inc
 
 NS					?= default
-APP					?= wordpress
+APP					?= 
 SERVICE_NAME		?= $(APP)
 SERVICE_PORT		?= 80
 MYSQL_HOST	      	?= mysql
-MYSQL_DATABASE      ?= wordpress
+MYSQL_DATABASE      ?= $(APP)
 MYSQL_USER          ?= wordpress
 MYSQL_PASSWORD      ?= wordpress
 export
 
-install: guard-SERVICE_NAME
-
+install: 	guard-APP dropdb initdb 
+delete:		guard-APP dropdb
 
 ## Create mysql database & grant (DROP DATABASE is performed!)
 initdb:	
 
-	mysql -h mysql -uroot -pmysql -e "DROP DATABASE wordpress"
-	mysql -h mysql -uroot -pmysql -e "CREATE DATABASE wordpress"
-	mysql -h mysql -uroot -pmysql -e "GRANT ALL PRIVILEGES ON wordpress.* TO 'wordpress'@'10.28.%' IDENTIFIED BY 'wordpress'"
+	mysql -h mysql -uroot -pmysql -e "CREATE DATABASE \`$(MYSQL_DATABASE)\`"
+	mysql -h mysql -uroot -pmysql -e "GRANT ALL PRIVILEGES ON \`$(MYSQL_DATABASE)\`.* TO '$(MYSQL_USER)'@'10.%' IDENTIFIED BY '$(MYSQL_PASSWORD)'"
+
+dropdb: ; mysql -h mysql -uroot -pmysql -e "DROP DATABASE IF EXISTS \`$(MYSQL_DATABASE)\`" | true
