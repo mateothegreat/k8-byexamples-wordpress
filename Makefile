@@ -7,14 +7,17 @@
 #
 include .make/Makefile.inc
 
-APP				?= wordpress
-HOST			?= wordpress.gcp.streaming-platform.com
-SERVICE_NAME	?= wordpress
-SERVICE_PORT	?= 80
-NS				?= default
+NS					?= default
+APP					?= wordpress
+SERVICE_NAME		?= $(APP)
+SERVICE_PORT		?= 80
+MYSQL_HOST	      	?= mysql
+MYSQL_DATABASE      ?= wordpress
+MYSQL_USER          ?= wordpress
+MYSQL_PASSWORD      ?= wordpress
 export
 
-install: guard-HOST guard-SERVICE_NAME guard-SERVICE_PORT
+install: guard-SERVICE_NAME
 
 
 ## Create mysql database & grant (DROP DATABASE is performed!)

@@ -2,8 +2,8 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: wordpress
-  name: wordpress
+    app: $SERVICE_NAME
+  name: $SERVICE_NAME
 spec:
   # type: NodePort
   ports:
@@ -12,4 +12,4 @@ spec:
     # name: www
     # protocol: TCP
   selector:
-    app: wordpress
+    app: $SERVICE_NAME

@@ -1,34 +1,29 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-  name: wordpress
+  name: $SERVICE_NAME
   labels:
-    app: wordpress
+    app: $SERVICE_NAME
 spec:
   strategy:
     type: Recreate
   template:
     metadata:
       labels:
-        app: wordpress
+        app: $SERVICE_NAME
     spec:
       containers:
         - image: wordpress:latest
-        # - image: wordpress:4.9.4-fpm-alpine
           name: wordpress
           env:
             - name: WORDPRESS_DB_HOST
-              value: mysql            
+              value: $MYSQL_HOST            
             - name: WORDPRESS_DB_NAME
-              value: wordpress
+              value: $MYSQL_DATABASE
             - name: WORDPRESS_DB_USER
-              value: wordpress
+              value: $MYSQL_USER
             - name: WORDPRESS_DB_PASSWORD
-              value: wordpress  
-              # valueFrom:
-              #   secretKeyRef:
-              #     name: mysql-pass
-              #     key: password.txt
+              value: $MYSQL_PASSWORD  
           ports:
             - containerPort: 80
               name: wordpress
@@ -45,6 +40,3 @@ spec:
         - name: config-volume
           configMap:
             name: wordpress-config
-            # items:
-            # - key: uploads.ini
-              # path: uploads.ini
