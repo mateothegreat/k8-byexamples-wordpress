@@ -7,9 +7,9 @@ metadata:
 spec:
   # type: NodePort
   ports:
-  - port: 80
-    # targetPort: 80
-    # name: www
-    # protocol: TCP
+  - port: $SERVICE_PORT
+    targetPort: 80
+    name: www
+    protocol: TCP
   selector:
     app: $SERVICE_NAME

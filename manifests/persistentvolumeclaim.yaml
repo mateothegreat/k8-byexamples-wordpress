@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: wordpress
+  name: $SERVICE_NAME-volume
   labels:
     app: wordpress
 spec:

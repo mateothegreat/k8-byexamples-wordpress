@@ -36,7 +36,7 @@ spec:
       volumes:
         - name: wordpress-local-storage
           persistentVolumeClaim:
-            claimName: wordpress
+            claimName: $SERVICE_NAME-volume
         - name: config-volume
           configMap:
             name: wordpress-config

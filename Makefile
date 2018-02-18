@@ -17,13 +17,13 @@ MYSQL_USER          ?= wordpress
 MYSQL_PASSWORD      ?= wordpress
 export
 
-install: 	guard-APP dropdb initdb 
+install: 	guard-APP initdb 
 delete:		guard-APP dropdb
 
 ## Create mysql database & grant (DROP DATABASE is performed!)
 initdb:	
 
-	mysql -h mysql -uroot -pmysql -e "CREATE DATABASE \`$(MYSQL_DATABASE)\`"
+	mysql -h mysql -uroot -pmysql -e "CREATE DATABASE IF NOT EXISTS \`$(MYSQL_DATABASE)\`"
 	mysql -h mysql -uroot -pmysql -e "GRANT ALL PRIVILEGES ON \`$(MYSQL_DATABASE)\`.* TO '$(MYSQL_USER)'@'10.%' IDENTIFIED BY '$(MYSQL_PASSWORD)'"
 
 dropdb: ; mysql -h mysql -uroot -pmysql -e "DROP DATABASE IF EXISTS \`$(MYSQL_DATABASE)\`" | true
