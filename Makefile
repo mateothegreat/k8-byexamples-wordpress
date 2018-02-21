@@ -11,7 +11,7 @@ NS					?= default
 APP					?= 
 SERVICE_NAME		?= $(APP)
 SERVICE_PORT		?= 80
-MYSQL_HOST	      	?= mysql
+MYSQL_HOST	      	?= mysql.default.svc.cluster.local
 MYSQL_DATABASE      ?= $(APP)
 MYSQL_USER          ?= wordpress
 MYSQL_PASSWORD      ?= wordpress
@@ -23,7 +23,12 @@ delete:		guard-APP dropdb
 ## Create mysql database & grant (DROP DATABASE is performed!)
 initdb:	
 
-	mysql -h mysql -uroot -pmysql -e "CREATE DATABASE IF NOT EXISTS \`$(MYSQL_DATABASE)\`"
-	mysql -h mysql -uroot -pmysql -e "GRANT ALL PRIVILEGES ON \`$(MYSQL_DATABASE)\`.* TO '$(MYSQL_USER)'@'10.%' IDENTIFIED BY '$(MYSQL_PASSWORD)'"
+	@nslookup $(MYSQL_HOST)
 
-dropdb: ; mysql -h mysql -uroot -pmysql -e "DROP DATABASE IF EXISTS \`$(MYSQL_DATABASE)\`" | true
+	mysql -h $(MYSQL_HOST) -uroot -pmysql -e "CREATE DATABASE IF NOT EXISTS \`$(MYSQL_DATABASE)\`"
+	mysql -h $(MYSQL_HOST) -uroot -pmysql -e "GRANT ALL PRIVILEGES ON \`$(MYSQL_DATABASE)\`.* TO '$(MYSQL_USER)'@'10.%' IDENTIFIED BY '$(MYSQL_PASSWORD)'"
+
+dropdb: 
+
+	@nslookup $(MYSQL_HOST)
+	@mysql -h $(MYSQL_HOST) -uroot -pmysql -e "DROP DATABASE IF EXISTS \`$(MYSQL_DATABASE)\`" | true
