@@ -12,13 +12,13 @@ APP					?=
 SERVICE_NAME		?= $(APP)
 SERVICE_PORT		?= 80
 MYSQL_HOST	      	?= mysql.default.svc.cluster.local
-MYSQL_DATABASE      ?= $(APP)
+MYSQL_DATABASE      ?= wordpress
 MYSQL_USER          ?= wordpress
 MYSQL_PASSWORD      ?= wordpress
 export
 
-install: 	guard-APP initdb 
-delete:		guard-APP dropdb
+install: 	guard-APP  
+delete:		guard-APP 
 
 ## Create mysql database & grant (DROP DATABASE is performed!)
 initdb:	
