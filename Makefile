@@ -8,14 +8,21 @@
 include .make/Makefile.inc
 
 NS					?= default
-APP					?= 
+APP					?= wp-matthewdavis-io
+HOST				?= matthewdavis.io
 SERVICE_NAME		?= $(APP)
 SERVICE_PORT		?= 80
-MYSQL_HOST	      	?= mysql.default.svc.cluster.local
-MYSQL_DATABASE      ?= wordpress
-MYSQL_USER          ?= wordpress
-MYSQL_PASSWORD      ?= wordpress
-export
+MYSQL_HOST			?= mysql.default.svc.cluster.local
+MYSQL_DATABASE		?= wordpress
+MYSQL_USER			?= wordpress
+MYSQL_PASSWORD		?= wordpress
+GCE_ZONE			?= us-central1-a
+GCE_DISK			?= wp-matthewdavis-io
+
+## Create disk
+create-disk:
+
+	gcloud compute disks create $(GCE_DISK) --zone $(GCE_ZONE) --size 10
 
 install: 	guard-APP  
 delete:		guard-APP 
@@ -32,3 +39,17 @@ dropdb:
 
 	@nslookup $(MYSQL_HOST)
 	@mysql -h $(MYSQL_HOST) -uroot -pmysql -e "DROP DATABASE IF EXISTS \`$(MYSQL_DATABASE)\`" | true
+
+## Create Ingress Resource
+ingress-issue:
+
+	cd k8-byexamples-ingress-controller && git submodule update --init
+
+	$(MAKE) -C k8-byexamples-ingress-controller ingress-issue
+
+## Create LetsEncrypt Certificate Request
+certificate-issue:
+
+	cd k8-byexamples-ingress-controller && git submodule update --init
+
+	$(MAKE) -C k8-byexamples-ingress-controller certificate-issue

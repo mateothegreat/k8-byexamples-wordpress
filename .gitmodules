@@ -1,4 +1,7 @@
 [submodule ".make"]
 	path = .make
-	url = git@github.com:mateothegreat/.make.git
+	url = https://github.com/mateothegreat/.make
 	branch = master
+[submodule "k8-byexamples-ingress-controller"]
+	path = k8-byexamples-ingress-controller
+	url = https://github.com/mateothegreat/k8-byexamples-ingress-controller
