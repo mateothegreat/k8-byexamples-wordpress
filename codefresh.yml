@@ -8,8 +8,8 @@ steps:
         commands:
             - git submodule update --init
             - kubectl config set-cluster kube-cluster --server="$GCP_K8_API_URL" --insecure-skip-tls-verify=true
-            - kubectl config set-credentials gitlab --token="$GCP_K8_TOKEN"
-            - kubectl config set-context default-context --cluster=kube-cluster --user=gitlab
+            - kubectl config set-credentials cicd --token="$GCP_K8_TOKEN"
+            - kubectl config set-context default-context --cluster=kube-cluster --user=cicd
             - kubectl config use-context default-context
             - make install
     
