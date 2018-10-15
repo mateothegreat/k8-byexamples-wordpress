@@ -12,12 +12,12 @@ APP					?= wp-workflow-host
 HOST				?= matthewdavis.io
 SERVICE_NAME		?= $(APP)
 SERVICE_PORT		?= 80
-MYSQL_HOST			?= mysql.devqa.streaming-platform.com
-MYSQL_DATABASE		?= wp_workflow_host
-MYSQL_USER			?= root
-MYSQL_PASSWORD		?= agaeq14
+MYSQL_HOST			?= 
+MYSQL_DATABASE		?= 
+MYSQL_USER			?= 
+MYSQL_PASSWORD		?= 
 GCE_ZONE			?= us-central1-a
-GCE_DISK			?= wp-workflow-host
+GCE_DISK			?= $(APP)
 
 ## Create disk
 create-disk:
