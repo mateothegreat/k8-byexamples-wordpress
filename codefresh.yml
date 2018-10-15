@@ -2,9 +2,11 @@ version: '1.0'
 stages:
  - deploy
 steps:
-    step1:
+    deploy:
         stage: 'deploy'
-        image: 'mateothegreat/docker-alpine-gcloud-kubectl:latest'
+        image_name: 'mateothegreat/docker-alpine-gcloud-kubectl'
+        tag: latest
+        registry: dockerhub
         commands:
             - git submodule update --init
             - kubectl config set-cluster kube-cluster --server="$GCP_K8_API_URL" --insecure-skip-tls-verify=true
