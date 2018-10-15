@@ -4,7 +4,7 @@ stages:
 steps:
     step1:
         stage: 'deploy'
-        image: mateothegreat/docker-alpine-gcloud-kubectl
+        image: mateothegreat/docker-alpine-gcloud-kubectl:latest
         commands:
             - git submodule update --init
             - kubectl config set-cluster kube-cluster --server="$GCP_K8_API_URL" --insecure-skip-tls-verify=true
