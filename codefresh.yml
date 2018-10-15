@@ -4,7 +4,7 @@ stages:
 steps:
     deploy:
         stage: 'deploy'
-        image_name: 'mateothegreat/docker-alpine-gcloud-kubectl'
+        image: 'mateothegreat/docker-alpine-gcloud-kubectl'
         tag: latest
         registry: dockerhub
         commands:
