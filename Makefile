@@ -8,16 +8,16 @@
 include .make/Makefile.inc
 
 NS					?= default
-APP					?= wp-matthewdavis-io
+APP					?= wp-workflow-host
 HOST				?= matthewdavis.io
 SERVICE_NAME		?= $(APP)
 SERVICE_PORT		?= 80
-MYSQL_HOST			?= mysql.default.svc.cluster.local
-MYSQL_DATABASE		?= wordpress
-MYSQL_USER			?= wordpress
-MYSQL_PASSWORD		?= wordpress
+MYSQL_HOST			?= mysql.devqa.streaming-platform.com
+MYSQL_DATABASE		?= wp_workflow_host
+MYSQL_USER			?= root
+MYSQL_PASSWORD		?= agaeq14
 GCE_ZONE			?= us-central1-a
-GCE_DISK			?= wp-matthewdavis-io
+GCE_DISK			?= wp-workflow-host
 
 ## Create disk
 create-disk:

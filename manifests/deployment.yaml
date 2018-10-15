@@ -12,6 +12,13 @@ spec:
       labels:
         app: $SERVICE_NAME
     spec:
+      initContainers:
+        - name: volume-mount-set-permissions
+          image: busybox
+          command: ["sh", "-c", "echo 'define( \"WP_ALLOW_MULTISITE\", true );' >> /var/www/html/wp-config.php"]
+          volumeMounts:
+          - name: $GCE_DISK
+            mountPath: /var/lib/grafana        
       containers:
         - image: wordpress:latest
           name: wordpress
