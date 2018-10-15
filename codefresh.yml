@@ -1,0 +1,11 @@
+version: '1.0'
+stages:
+ - deploy
+steps:
+    step1:
+        stage: 'deploy'
+        image: mateothegreat/docker-alpine-gcloud-kubectl
+        commands:
+            - 'git submodule update --init'
+            - 'make install'
+    
