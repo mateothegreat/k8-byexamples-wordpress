@@ -12,13 +12,13 @@ spec:
       labels:
         app: $SERVICE_NAME
     spec:
-      initContainers:
-        - name: volume-mount-set-permissions
-          image: busybox
-          command: ["sh", "-c", "echo 'define( \"WP_ALLOW_MULTISITE\", true );' >> /var/www/html/wp-config.php"]
-          volumeMounts:
-          - name: wordpress-local-storage
-            mountPath: /var/www/html        
+      # initContainers:
+      #   - name: volume-mount-set-permissions
+      #     image: busybox
+      #     command: ["sh", "-c", "echo 'define( \"WP_ALLOW_MULTISITE\", true );' >> /var/www/html/wp-config.php"]
+      #     volumeMounts:
+      #     - name: wordpress-local-storage
+      #       mountPath: /var/www/html        
       containers:
         - image: wordpress:latest
           name: wordpress
