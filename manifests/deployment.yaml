@@ -17,7 +17,7 @@ spec:
           image: busybox
           command: ["sh", "-c", "echo 'define( \"WP_ALLOW_MULTISITE\", true );' >> /var/www/html/wp-config.php"]
           volumeMounts:
-          - name: dubdub
+          - name: wordpress-local-storage
             mountPath: /var/www/html        
       containers:
         - image: wordpress:latest
