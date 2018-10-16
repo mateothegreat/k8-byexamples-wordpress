@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   persistentVolumeReclaimPolicy: Retain
-  storageClassName: fast
+  storageClassName: pd-standard
   gcePersistentDisk:
     fsType: ext4
     pdName: $APP
