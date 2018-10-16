@@ -17,8 +17,8 @@ spec:
           image: busybox
           command: ["sh", "-c", "echo 'define( \"WP_ALLOW_MULTISITE\", true );' >> /var/www/html/wp-config.php"]
           volumeMounts:
-          - name: $GCE_DISK
-            mountPath: /var/lib/grafana        
+          - name: dubdub
+            mountPath: /var/www/html        
       containers:
         - image: wordpress:latest
           name: wordpress
