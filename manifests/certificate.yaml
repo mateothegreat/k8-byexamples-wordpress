@@ -1,0 +1,22 @@
+apiVersion: certmanager.k8s.io/v1alpha1
+kind: Certificate
+metadata:
+  name: $DOMAIN
+spec:
+  secretName: tls-$DOMAIN
+  issuerRef:
+    name: letsencrypt-staging-cluster-issuer
+    kind: ClusterIssuer
+  commonName: $DOMAIN
+  dnsNames:
+  - $DOMAIN
+  acme:
+    config:
+    - http01:
+        ingressClass: nginx
+      domains:
+      - $DOMAIN
+    - http01:
+        ingress: ingress-svc
+      domains:
+      - $DOMAIN
